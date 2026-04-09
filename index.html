@@ -182,7 +182,7 @@
           <button type="button" data-lang-button="zh">中文</button>
         </div>
       </div>
-      <h1 data-i18n="title">Welcome to CyberShiba</h1>
+      <h1 data-i18n="heroTitle">Welcome to CyberShiba</h1>
       <p data-i18n="description">
         This is the shared entry point. You can head into the AI news hub or open
         the resume builder directly.
@@ -202,7 +202,7 @@
       const messages = {
         en: {
           lang: "en",
-          title: "CyberShiba | AI Info and Resume Maker",
+          seoTitle: "CyberShiba | AI Info and Resume Maker",
           descriptionMeta:
             "CyberShiba is the shared gateway to AI Info and Resume Maker. Explore curated AI news or build a polished resume in your browser.",
           ogDescription:
@@ -210,7 +210,7 @@
           twitterDescription:
             "A shared entry point for AI Info and Resume Maker on CyberShiba.",
           eyebrow: "CyberShiba Portal",
-          title: "Welcome to CyberShiba",
+          heroTitle: "Welcome to CyberShiba",
           description:
             "This is the shared entry point. You can head into the AI news hub or open the resume builder directly.",
           aiInfo: "Open AI Info",
@@ -218,7 +218,7 @@
         },
         zh: {
           lang: "zh-CN",
-          title: "CyberShiba | AI Info 与 Resume Maker",
+          seoTitle: "CyberShiba | AI Info 与 Resume Maker",
           descriptionMeta:
             "CyberShiba 是 AI Info 与 Resume Maker 的统一入口。你可以浏览精选 AI 资讯，或直接开始制作简历。",
           ogDescription:
@@ -226,7 +226,7 @@
           twitterDescription:
             "CyberShiba 提供 AI Info 与 Resume Maker 的统一入口。",
           eyebrow: "CyberShiba Portal",
-          title: "欢迎来到 CyberShiba",
+          heroTitle: "欢迎来到 CyberShiba",
           description:
             "这里是统一入口。你可以从这里进入 AI 资讯站，或者直接打开简历制作工具。",
           aiInfo: "进入 AI Info",
@@ -240,7 +240,7 @@
         const message = messages[language] ?? messages.en;
 
         document.documentElement.lang = message.lang;
-        document.title = message.title;
+        document.title = message.seoTitle;
         document.querySelectorAll("[data-i18n]").forEach((node) => {
           const key = node.getAttribute("data-i18n");
           if (key && message[key]) {
@@ -256,9 +256,9 @@
         const structuredData = document.getElementById("structured-data");
 
         description?.setAttribute("content", message.descriptionMeta);
-        ogTitle?.setAttribute("content", message.title);
+        ogTitle?.setAttribute("content", message.seoTitle);
         ogDescription?.setAttribute("content", message.ogDescription);
-        twitterTitle?.setAttribute("content", message.title);
+        twitterTitle?.setAttribute("content", message.seoTitle);
         twitterDescription?.setAttribute("content", message.twitterDescription);
 
         if (structuredData) {

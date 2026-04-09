@@ -14,14 +14,6 @@
       "destination": "https://resume-maker-omega-ten.vercel.app/icons.svg"
     },
     {
-      "source": "/robots.txt",
-      "destination": "https://resume-maker-omega-ten.vercel.app/robots.txt"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "https://resume-maker-omega-ten.vercel.app/sitemap.xml"
-    },
-    {
       "source": "/_next/:path*",
       "destination": "https://ai-info-eta.vercel.app/_next/:path*"
     },
