@@ -9,8 +9,10 @@ Vercel routing layer that serves one domain across two existing deployments:
 
 ## Environment variables
 
-- This project currently uses fixed external rewrites in `vercel.json`
-- `AI_INFO_ORIGIN` and `RESUME_MAKER_ORIGIN` are no longer required for routing
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `AI_INFO_ORIGIN` and `RESUME_MAKER_ORIGIN` are reserved for upstream origins if you switch back to environment-based rewrites
+- Create a `feedback_submissions` table before using the feedback submission API
 
 ## Deploy
 
