@@ -3,14 +3,14 @@
 Vercel routing layer that serves one domain across two existing deployments:
 
 - `/` serves a static welcome page
-- `/_next` and `/api` proxy to `AI_INFO_ORIGIN` for Next.js assets and data requests
-- `/ai-info` and its subpaths proxy to `AI_INFO_ORIGIN`
-- `/resume-maker` and its subpaths proxy to `RESUME_MAKER_ORIGIN`
+- `/_next` and `/api` rewrite to `ai-info`
+- `/ai-info` and its subpaths rewrite to `ai-info`
+- `/resume-maker` and its subpaths rewrite to `resume-maker`
 
 ## Environment variables
 
-- `AI_INFO_ORIGIN=https://your-ai-info.vercel.app`
-- `RESUME_MAKER_ORIGIN=https://your-resume-maker.vercel.app`
+- This project currently uses fixed external rewrites in `vercel.json`
+- `AI_INFO_ORIGIN` and `RESUME_MAKER_ORIGIN` are no longer required for routing
 
 ## Deploy
 

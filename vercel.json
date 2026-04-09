@@ -3,27 +3,27 @@
   "rewrites": [
     {
       "source": "/_next/:path*",
-      "destination": "/api/proxy?path=_next/:path*"
+      "destination": "https://ai-info-eta.vercel.app/_next/:path*"
     },
     {
       "source": "/api/:path*",
-      "destination": "/api/proxy?path=api/:path*"
+      "destination": "https://ai-info-eta.vercel.app/api/:path*"
     },
     {
       "source": "/ai-info",
-      "destination": "/api/proxy?path=ai-info"
+      "destination": "https://ai-info-eta.vercel.app/"
     },
     {
       "source": "/ai-info/:path*",
-      "destination": "/api/proxy?path=ai-info/:path*"
+      "destination": "https://ai-info-eta.vercel.app/:path*"
     },
     {
       "source": "/resume-maker",
-      "destination": "/api/proxy?path=resume-maker"
+      "destination": "https://resume-maker-omega-ten.vercel.app/"
     },
     {
       "source": "/resume-maker/:path*",
-      "destination": "/api/proxy?path=resume-maker/:path*"
+      "destination": "https://resume-maker-omega-ten.vercel.app/:path*"
     }
   ]
 }
