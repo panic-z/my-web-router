@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/resume-maker",
+      "destination": "/api/proxy?path=resume-maker"
+    },
+    {
+      "source": "/resume-maker/:path*",
+      "destination": "/api/proxy?path=resume-maker/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "/api/proxy"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/api/proxy?path=:path*"
+    }
+  ]
+}
