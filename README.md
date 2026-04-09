@@ -2,7 +2,8 @@
 
 Vercel routing layer that serves one domain across two existing deployments:
 
-- `/` and all non-`/resume-maker` paths proxy to `AI_INFO_ORIGIN`
+- `/` serves a static welcome page
+- `/ai-info` and its subpaths proxy to `AI_INFO_ORIGIN`
 - `/resume-maker` and its subpaths proxy to `RESUME_MAKER_ORIGIN`
 
 ## Environment variables

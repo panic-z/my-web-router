@@ -2,20 +2,20 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/ai-info",
+      "destination": "/api/proxy?path=ai-info"
+    },
+    {
+      "source": "/ai-info/:path*",
+      "destination": "/api/proxy?path=ai-info/:path*"
+    },
+    {
       "source": "/resume-maker",
       "destination": "/api/proxy?path=resume-maker"
     },
     {
       "source": "/resume-maker/:path*",
       "destination": "/api/proxy?path=resume-maker/:path*"
-    },
-    {
-      "source": "/",
-      "destination": "/api/proxy"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/api/proxy?path=:path*"
     }
   ]
 }

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome | CyberShiba</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f3ea;
+        --panel: rgba(255, 252, 245, 0.9);
+        --text: #1f2937;
+        --muted: #6b7280;
+        --line: rgba(31, 41, 55, 0.12);
+        --accent: #b45309;
+        --accent-strong: #7c2d12;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Georgia", "Noto Serif SC", serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(180, 83, 9, 0.18), transparent 35%),
+          radial-gradient(circle at bottom right, rgba(124, 45, 18, 0.14), transparent 32%),
+          linear-gradient(135deg, #f9f6ef 0%, #efe4d1 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      main {
+        width: min(760px, 100%);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 40px 28px;
+        box-shadow: 0 24px 80px rgba(31, 41, 55, 0.08);
+        backdrop-filter: blur(8px);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent-strong);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(40px, 8vw, 72px);
+        line-height: 0.95;
+      }
+
+      p {
+        margin: 20px 0 0;
+        max-width: 42rem;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      nav {
+        display: grid;
+        gap: 14px;
+        margin-top: 32px;
+      }
+
+      a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 20px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        color: inherit;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.64);
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      a:hover {
+        transform: translateY(-1px);
+        border-color: rgba(180, 83, 9, 0.35);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      strong {
+        font-size: 20px;
+      }
+
+      span {
+        color: var(--accent);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">CyberShiba Portal</p>
+      <h1>欢迎来到 CyberShiba</h1>
+      <p>
+        这里是统一入口。你可以从这里进入 AI 资讯站，或者直接打开简历制作工具。
+      </p>
+      <nav>
+        <a href="/ai-info">
+          <strong>进入 AI Info</strong>
+          <span>/ai-info</span>
+        </a>
+        <a href="/resume-maker">
+          <strong>进入 Resume Maker</strong>
+          <span>/resume-maker</span>
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>

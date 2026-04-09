@@ -26,14 +26,27 @@ function getPath(req) {
 }
 
 function getOrigin(pathname) {
+  if (pathname === "/ai-info" || pathname.startsWith("/ai-info/")) {
+    return process.env.AI_INFO_ORIGIN;
+  }
+
   if (pathname === "/resume-maker" || pathname.startsWith("/resume-maker/")) {
     return process.env.RESUME_MAKER_ORIGIN;
   }
 
-  return process.env.AI_INFO_ORIGIN;
+  return null;
 }
 
 function getUpstreamPath(pathname) {
+  if (pathname === "/ai-info") {
+    return "/";
+  }
+
+  if (pathname.startsWith("/ai-info/")) {
+    const strippedPath = pathname.slice("/ai-info".length);
+    return strippedPath.length > 0 ? strippedPath : "/";
+  }
+
   if (pathname === "/resume-maker") {
     return "/";
   }
@@ -108,6 +121,35 @@ module.exports = async (req, res) => {
   const origin = getOrigin(pathname);
 
   if (!origin) {
+    res.status(500).json({
+      error: "Unsupported route",
+      pathname,
+      requiredEnv:
+        pathname === "/ai-info" || pathname.startsWith("/ai-info/")
+          ? "AI_INFO_ORIGIN"
+          : pathname === "/resume-maker" || pathname.startsWith("/resume-maker/")
+            ? "RESUME_MAKER_ORIGIN"
+            : null,
+    });
+    return;
+  }
+
+  if (
+    (pathname === "/ai-info" || pathname.startsWith("/ai-info/")) &&
+    !process.env.AI_INFO_ORIGIN
+  ) {
+    res.status(500).json({
+      error: "Missing upstream origin",
+      pathname,
+      requiredEnv: "AI_INFO_ORIGIN",
+    });
+    return;
+  }
+
+  if (
+    (pathname === "/resume-maker" || pathname.startsWith("/resume-maker/")) &&
+    !process.env.RESUME_MAKER_ORIGIN
+  ) {
     res.status(500).json({
       error: "Missing upstream origin",
       pathname,
