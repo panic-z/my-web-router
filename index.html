@@ -3,7 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome | CyberShiba</title>
+    <title>CyberShiba | AI Info and Resume Maker</title>
+    <meta
+      name="description"
+      content="CyberShiba is the shared gateway to AI Info and Resume Maker. Explore curated AI news or build a polished resume in your browser."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://www.cybershiba.cn/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberShiba" />
+    <meta property="og:title" content="CyberShiba | AI Info and Resume Maker" />
+    <meta
+      property="og:description"
+      content="Open AI Info for curated AI updates or jump into Resume Maker to create and export a polished resume."
+    />
+    <meta property="og:url" content="https://www.cybershiba.cn/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CyberShiba | AI Info and Resume Maker" />
+    <meta
+      name="twitter:description"
+      content="A shared entry point for AI Info and Resume Maker on CyberShiba."
+    />
+    <script type="application/ld+json" id="structured-data">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "CyberShiba",
+        "url": "https://www.cybershiba.cn/",
+        "description": "A shared entry point for AI Info and Resume Maker.",
+        "hasPart": [
+          {
+            "@type": "WebSite",
+            "name": "AI Info",
+            "url": "https://www.cybershiba.cn/ai-info"
+          },
+          {
+            "@type": "WebApplication",
+            "name": "Resume Maker",
+            "url": "https://www.cybershiba.cn/resume-maker"
+          }
+        ]
+      }
+    </script>
     <style>
       :root {
         color-scheme: light;
@@ -161,6 +202,13 @@
       const messages = {
         en: {
           lang: "en",
+          title: "CyberShiba | AI Info and Resume Maker",
+          descriptionMeta:
+            "CyberShiba is the shared gateway to AI Info and Resume Maker. Explore curated AI news or build a polished resume in your browser.",
+          ogDescription:
+            "Open AI Info for curated AI updates or jump into Resume Maker to create and export a polished resume.",
+          twitterDescription:
+            "A shared entry point for AI Info and Resume Maker on CyberShiba.",
           eyebrow: "CyberShiba Portal",
           title: "Welcome to CyberShiba",
           description:
@@ -170,6 +218,13 @@
         },
         zh: {
           lang: "zh-CN",
+          title: "CyberShiba | AI Info 与 Resume Maker",
+          descriptionMeta:
+            "CyberShiba 是 AI Info 与 Resume Maker 的统一入口。你可以浏览精选 AI 资讯，或直接开始制作简历。",
+          ogDescription:
+            "进入 AI Info 获取精选 AI 资讯，或打开 Resume Maker 在线制作并导出简历。",
+          twitterDescription:
+            "CyberShiba 提供 AI Info 与 Resume Maker 的统一入口。",
           eyebrow: "CyberShiba Portal",
           title: "欢迎来到 CyberShiba",
           description:
@@ -185,12 +240,53 @@
         const message = messages[language] ?? messages.en;
 
         document.documentElement.lang = message.lang;
+        document.title = message.title;
         document.querySelectorAll("[data-i18n]").forEach((node) => {
           const key = node.getAttribute("data-i18n");
           if (key && message[key]) {
             node.textContent = message[key];
           }
         });
+
+        const description = document.querySelector('meta[name="description"]');
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+        const structuredData = document.getElementById("structured-data");
+
+        description?.setAttribute("content", message.descriptionMeta);
+        ogTitle?.setAttribute("content", message.title);
+        ogDescription?.setAttribute("content", message.ogDescription);
+        twitterTitle?.setAttribute("content", message.title);
+        twitterDescription?.setAttribute("content", message.twitterDescription);
+
+        if (structuredData) {
+          structuredData.textContent = JSON.stringify(
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "CyberShiba",
+              url: "https://www.cybershiba.cn/",
+              description: message.descriptionMeta,
+              hasPart: [
+                {
+                  "@type": "WebSite",
+                  name: "AI Info",
+                  url: "https://www.cybershiba.cn/ai-info",
+                },
+                {
+                  "@type": "WebApplication",
+                  name: "Resume Maker",
+                  url: "https://www.cybershiba.cn/resume-maker",
+                },
+              ],
+              inLanguage: message.lang,
+            },
+            null,
+            2
+          );
+        }
 
         buttons.forEach((button) => {
           button.classList.toggle("is-active", button.dataset.langButton === language);
