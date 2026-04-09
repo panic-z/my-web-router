@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,16 +44,47 @@
         backdrop-filter: blur(8px);
       }
 
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
       .eyebrow {
-        margin: 0 0 12px;
+        margin: 0;
         color: var(--accent-strong);
         font-size: 12px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
       }
 
+      .lang-switch {
+        display: inline-flex;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .lang-switch button {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 13px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      .lang-switch button.is-active {
+        background: var(--accent-strong);
+        color: #fffaf5;
+      }
+
       h1 {
-        margin: 0;
+        margin: 18px 0 0;
         font-size: clamp(40px, 8vw, 72px);
         line-height: 0.95;
       }
@@ -103,21 +134,88 @@
   </head>
   <body>
     <main>
-      <p class="eyebrow">CyberShiba Portal</p>
-      <h1>欢迎来到 CyberShiba</h1>
-      <p>
-        这里是统一入口。你可以从这里进入 AI 资讯站，或者直接打开简历制作工具。
+      <div class="topbar">
+        <p class="eyebrow" data-i18n="eyebrow">CyberShiba Portal</p>
+        <div class="lang-switch" aria-label="Language switcher">
+          <button type="button" class="is-active" data-lang-button="en">EN</button>
+          <button type="button" data-lang-button="zh">中文</button>
+        </div>
+      </div>
+      <h1 data-i18n="title">Welcome to CyberShiba</h1>
+      <p data-i18n="description">
+        This is the shared entry point. You can head into the AI news hub or open
+        the resume builder directly.
       </p>
       <nav>
         <a href="/ai-info">
-          <strong>进入 AI Info</strong>
+          <strong data-i18n="aiInfo">Open AI Info</strong>
           <span>/ai-info</span>
         </a>
         <a href="/resume-maker">
-          <strong>进入 Resume Maker</strong>
+          <strong data-i18n="resumeMaker">Open Resume Maker</strong>
           <span>/resume-maker</span>
         </a>
       </nav>
     </main>
+    <script>
+      const messages = {
+        en: {
+          lang: "en",
+          eyebrow: "CyberShiba Portal",
+          title: "Welcome to CyberShiba",
+          description:
+            "This is the shared entry point. You can head into the AI news hub or open the resume builder directly.",
+          aiInfo: "Open AI Info",
+          resumeMaker: "Open Resume Maker",
+        },
+        zh: {
+          lang: "zh-CN",
+          eyebrow: "CyberShiba Portal",
+          title: "欢迎来到 CyberShiba",
+          description:
+            "这里是统一入口。你可以从这里进入 AI 资讯站，或者直接打开简历制作工具。",
+          aiInfo: "进入 AI Info",
+          resumeMaker: "进入 Resume Maker",
+        },
+      };
+
+      const buttons = document.querySelectorAll("[data-lang-button]");
+
+      function setLanguage(language) {
+        const message = messages[language] ?? messages.en;
+
+        document.documentElement.lang = message.lang;
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          if (key && message[key]) {
+            node.textContent = message[key];
+          }
+        });
+
+        buttons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.langButton === language);
+        });
+
+        try {
+          localStorage.setItem("cybershiba-language", language);
+        } catch {}
+      }
+
+      const storedLanguage = (() => {
+        try {
+          return localStorage.getItem("cybershiba-language");
+        } catch {
+          return null;
+        }
+      })();
+
+      setLanguage(storedLanguage === "zh" ? "zh" : "en");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setLanguage(button.dataset.langButton === "zh" ? "zh" : "en");
+        });
+      });
+    </script>
   </body>
 </html>
