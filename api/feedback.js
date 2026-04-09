@@ -39,7 +39,14 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const result = validateFeedbackSubmission(req.body ?? {});
+  let result;
+
+  try {
+    result = validateFeedbackSubmission(req.body ?? {});
+  } catch {
+    json(res, 400, { error: "Invalid request body." });
+    return;
+  }
 
   if (!result.ok) {
     json(res, 400, { error: result.error.message });
@@ -54,16 +61,23 @@ module.exports = async (req, res) => {
     ...result.value,
   });
 
-  const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/feedback_submissions`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-      authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-      prefer: "return=minimal",
-    },
-    body: JSON.stringify(row),
-  });
+  let response;
+
+  try {
+    response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/feedback_submissions`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+        authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+        prefer: "return=minimal",
+      },
+      body: JSON.stringify(row),
+    });
+  } catch (error) {
+    json(res, 502, { error: "Failed to store feedback.", detail: "Network error contacting storage." });
+    return;
+  }
 
   if (!response.ok) {
     const detail = await response.text();
