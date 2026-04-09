@@ -26,6 +26,10 @@ function getPath(req) {
 }
 
 function getOrigin(pathname) {
+  if (pathname.startsWith("/_next/") || pathname.startsWith("/api/")) {
+    return process.env.AI_INFO_ORIGIN;
+  }
+
   if (pathname === "/ai-info" || pathname.startsWith("/ai-info/")) {
     return process.env.AI_INFO_ORIGIN;
   }
@@ -40,6 +44,10 @@ function getOrigin(pathname) {
 function getUpstreamPath(pathname) {
   if (pathname === "/ai-info") {
     return "/";
+  }
+
+  if (pathname.startsWith("/_next/") || pathname.startsWith("/api/")) {
+    return pathname;
   }
 
   if (pathname.startsWith("/ai-info/")) {
@@ -126,6 +134,8 @@ module.exports = async (req, res) => {
       pathname,
       requiredEnv:
         pathname === "/ai-info" || pathname.startsWith("/ai-info/")
+          ? "AI_INFO_ORIGIN"
+          : pathname.startsWith("/_next/") || pathname.startsWith("/api/")
           ? "AI_INFO_ORIGIN"
           : pathname === "/resume-maker" || pathname.startsWith("/resume-maker/")
             ? "RESUME_MAKER_ORIGIN"

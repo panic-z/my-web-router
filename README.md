@@ -3,6 +3,7 @@
 Vercel routing layer that serves one domain across two existing deployments:
 
 - `/` serves a static welcome page
+- `/_next` and `/api` proxy to `AI_INFO_ORIGIN` for Next.js assets and data requests
 - `/ai-info` and its subpaths proxy to `AI_INFO_ORIGIN`
 - `/resume-maker` and its subpaths proxy to `RESUME_MAKER_ORIGIN`
 
