@@ -494,6 +494,11 @@
         event.preventDefault();
         setStatus("");
 
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
         if (!pageUrlField.value.trim()) {
           pageUrlField.value = getDefaultPageUrl();
         }
