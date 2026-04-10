@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberShiba | Share Feedback</title>
+    <meta
+      name="description"
+      content="Share bug reports and feature requests for CyberShiba, AI Info, and Resume Maker."
+    />
+    <meta name="robots" content="noindex,follow" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f3ea;
+        --panel: rgba(255, 252, 245, 0.92);
+        --text: #1f2937;
+        --muted: #6b7280;
+        --line: rgba(31, 41, 55, 0.12);
+        --accent: #b45309;
+        --accent-strong: #7c2d12;
+        --danger: #9f1239;
+        --danger-soft: rgba(159, 18, 57, 0.08);
+        --success-soft: rgba(120, 113, 108, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Georgia", "Noto Serif SC", serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(180, 83, 9, 0.18), transparent 35%),
+          radial-gradient(circle at bottom right, rgba(124, 45, 18, 0.14), transparent 32%),
+          linear-gradient(135deg, #f9f6ef 0%, #efe4d1 100%);
+        padding: 24px;
+      }
+
+      main {
+        width: min(760px, 100%);
+        margin: 0 auto;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 40px 28px;
+        box-shadow: 0 24px 80px rgba(31, 41, 55, 0.08);
+        backdrop-filter: blur(8px);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--accent-strong);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .lang-switch {
+        display: inline-flex;
+        gap: 8px;
+        padding: 6px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.66);
+      }
+
+      .lang-switch button {
+        border: 0;
+        border-radius: 999px;
+        padding: 8px 12px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .lang-switch button.is-active {
+        background: rgba(124, 45, 18, 0.12);
+        color: var(--accent-strong);
+      }
+
+      h1 {
+        margin: 18px 0 0;
+        font-size: clamp(40px, 8vw, 68px);
+        line-height: 0.95;
+      }
+
+      .intro {
+        margin: 20px 0 0;
+        max-width: 40rem;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      form,
+      .success-state {
+        margin-top: 32px;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .split {
+        display: grid;
+        gap: 18px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        font-size: 15px;
+      }
+
+      .field-label {
+        font-weight: 700;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        font: inherit;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(31, 41, 55, 0.18);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.84);
+        color: var(--text);
+        padding: 14px 16px;
+        transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: rgba(180, 83, 9, 0.6);
+        box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.12);
+        background: #fff;
+      }
+
+      textarea {
+        min-height: 132px;
+        resize: vertical;
+      }
+
+      .group-card {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.58);
+      }
+
+      .group-card h2 {
+        margin: 0 0 10px;
+        font-size: 24px;
+      }
+
+      .group-card p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      button[type="submit"] {
+        border: 0;
+        border-radius: 999px;
+        padding: 14px 24px;
+        background: var(--accent-strong);
+        color: #fffaf5;
+        cursor: pointer;
+        transition: transform 160ms ease, opacity 160ms ease;
+      }
+
+      button[type="submit"]:hover:not(:disabled) {
+        transform: translateY(-1px);
+      }
+
+      button[type="submit"]:disabled {
+        cursor: wait;
+        opacity: 0.72;
+      }
+
+      .status,
+      .success-state {
+        border-radius: 18px;
+        padding: 16px 18px;
+      }
+
+      .status {
+        display: none;
+        border: 1px solid rgba(159, 18, 57, 0.16);
+        background: var(--danger-soft);
+        color: var(--danger);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .status.is-visible {
+        display: block;
+      }
+
+      .success-state {
+        display: none;
+        border: 1px solid rgba(124, 45, 18, 0.18);
+        background: var(--success-soft);
+      }
+
+      .success-state.is-visible {
+        display: block;
+      }
+
+      .success-state h2 {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      .success-state p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .honeypot {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      @media (min-width: 700px) {
+        .split {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="topbar">
+        <p class="eyebrow" data-i18n="eyebrow">CyberShiba Feedback</p>
+        <div class="lang-switch" data-i18n-aria-label="languageSwitcher" aria-label="Language switcher">
+          <button type="button" class="is-active" data-lang-button="en">EN</button>
+          <button type="button" data-lang-button="zh">中文</button>
+        </div>
+      </div>
+      <h1 data-i18n="heroTitle">Share feedback that improves the product.</h1>
+      <p class="intro" data-i18n="supportIntro">
+        Send a bug report or feature request for the portal, AI Info, or Resume Maker.
+        The form adapts to the kind of feedback you are sending.
+      </p>
+
+      <form id="feedback-form" novalidate>
+        <div class="field-grid">
+          <div class="split">
+            <label>
+              <span class="field-label" data-i18n="feedbackType">Feedback type</span>
+              <select id="feedback-type" name="feedbackType" required>
+                <option value="bug" data-i18n-option-label="feedbackTypeBug">Bug report</option>
+                <option value="feature" data-i18n-option-label="feedbackTypeFeature">Feature request</option>
+              </select>
+            </label>
+
+            <label>
+              <span class="field-label" data-i18n="product">Product</span>
+              <select id="product" name="product" required>
+                <option value="portal" data-i18n-option-label="productPortal">CyberShiba Portal</option>
+                <option value="ai-info" data-i18n-option-label="productAiInfo">AI Info</option>
+                <option value="resume-maker" data-i18n-option-label="productResumeMaker">Resume Maker</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span class="field-label" data-i18n="title">Short title</span>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              maxlength="120"
+              data-i18n-placeholder="titlePlaceholder"
+              placeholder="Summarize the issue or request"
+              required
+            />
+          </label>
+
+          <label>
+            <span class="field-label" data-i18n="pageUrl">Page URL</span>
+            <input
+              id="page-url"
+              name="pageUrl"
+              type="url"
+              maxlength="500"
+              data-i18n-placeholder="pageUrlPlaceholder"
+              placeholder="https://www.cybershiba.cn/..."
+            />
+            <span class="hint" data-i18n="pageUrlHint">Pre-filled from the page you came from when possible.</span>
+          </label>
+
+          <section id="bug-fields" class="group-card">
+            <h2 data-i18n="bugDetails">Bug details</h2>
+            <p data-i18n="bugIntro">Describe how to reproduce the issue and what you expected to happen.</p>
+            <div class="field-grid">
+              <label>
+                <span class="field-label" data-i18n="steps">Steps to reproduce</span>
+                <textarea
+                  id="steps"
+                  name="steps"
+                  maxlength="3000"
+                  data-i18n-placeholder="stepsPlaceholder"
+                  placeholder="List the exact steps that lead to the problem"
+                ></textarea>
+              </label>
+
+              <div class="split">
+                <label>
+                  <span class="field-label" data-i18n="expectedResult">Expected result</span>
+                  <textarea
+                    id="expected-result"
+                    name="expectedResult"
+                    maxlength="2000"
+                    data-i18n-placeholder="expectedResultPlaceholder"
+                    placeholder="What should have happened?"
+                  ></textarea>
+                </label>
+
+                <label>
+                  <span class="field-label" data-i18n="actualResult">Actual result</span>
+                  <textarea
+                    id="actual-result"
+                    name="actualResult"
+                    maxlength="2000"
+                    data-i18n-placeholder="actualResultPlaceholder"
+                    placeholder="What happened instead?"
+                  ></textarea>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section id="feature-fields" class="group-card" hidden>
+            <h2 data-i18n="featureDetails">Feature details</h2>
+            <p data-i18n="featureIntro">Explain the pain point, your idea, and the situation where it matters.</p>
+            <div class="field-grid">
+              <label>
+                <span class="field-label" data-i18n="currentProblem">Current problem</span>
+                <textarea
+                  id="current-problem"
+                  name="currentProblem"
+                  maxlength="2000"
+                  data-i18n-placeholder="currentProblemPlaceholder"
+                  placeholder="What is difficult or missing today?"
+                ></textarea>
+              </label>
+
+              <label>
+                <span class="field-label" data-i18n="proposal">Proposal</span>
+                <textarea
+                  id="proposal"
+                  name="proposal"
+                  maxlength="2000"
+                  data-i18n-placeholder="proposalPlaceholder"
+                  placeholder="What would you like to see added or changed?"
+                ></textarea>
+              </label>
+
+              <label>
+                <span class="field-label" data-i18n="useCase">Use case</span>
+                <textarea
+                  id="use-case"
+                  name="useCase"
+                  maxlength="2000"
+                  data-i18n-placeholder="useCasePlaceholder"
+                  placeholder="When would this feature help you most?"
+                ></textarea>
+              </label>
+            </div>
+          </section>
+
+          <label>
+            <span class="field-label" data-i18n="contact">Contact details</span>
+            <input
+              id="contact"
+              name="contact"
+              type="text"
+              maxlength="160"
+              data-i18n-placeholder="contactPlaceholder"
+              placeholder="Optional email, handle, or note for follow-up"
+            />
+            <span class="hint" data-i18n="contactHint">Optional. Leave blank if you do not want a response.</span>
+          </label>
+
+          <label class="honeypot" aria-hidden="true">
+            <span data-i18n="honeypotLabel">Leave this field empty</span>
+            <input id="company" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+          </label>
+
+          <p id="form-status" class="status" role="alert" aria-live="polite"></p>
+        </div>
+
+        <div class="actions">
+          <button id="submit-button" type="submit" data-i18n="submitIdle">Send feedback</button>
+        </div>
+      </form>
+
+      <section id="success-state" class="success-state" aria-live="polite">
+        <h2 data-i18n="successTitle">Thanks for the feedback.</h2>
+        <p id="success-message" data-i18n="successBody">
+          Your note has been recorded and will help shape the next iteration.
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const PRODUCTS = ["portal", "ai-info", "resume-maker"];
+      const messages = {
+        en: {
+          lang: "en",
+          seoTitle: "CyberShiba | Share Feedback",
+          descriptionMeta:
+            "Share bug reports and feature requests for CyberShiba, AI Info, and Resume Maker.",
+          eyebrow: "CyberShiba Feedback",
+          languageSwitcher: "Language switcher",
+          heroTitle: "Share feedback that improves the product.",
+          supportIntro:
+            "Send a bug report or feature request for the portal, AI Info, or Resume Maker. The form adapts to the kind of feedback you are sending.",
+          feedbackType: "Feedback type",
+          feedbackTypeBug: "Bug report",
+          feedbackTypeFeature: "Feature request",
+          product: "Product",
+          productPortal: "CyberShiba Portal",
+          productAiInfo: "AI Info",
+          productResumeMaker: "Resume Maker",
+          title: "Short title",
+          titlePlaceholder: "Summarize the issue or request",
+          pageUrl: "Page URL",
+          pageUrlPlaceholder: "https://www.cybershiba.cn/...",
+          pageUrlHint: "Pre-filled from the page you came from when possible.",
+          bugDetails: "Bug details",
+          bugIntro: "Describe how to reproduce the issue and what you expected to happen.",
+          steps: "Steps to reproduce",
+          stepsPlaceholder: "List the exact steps that lead to the problem",
+          expectedResult: "Expected result",
+          expectedResultPlaceholder: "What should have happened?",
+          actualResult: "Actual result",
+          actualResultPlaceholder: "What happened instead?",
+          featureDetails: "Feature details",
+          featureIntro: "Explain the pain point, your idea, and the situation where it matters.",
+          currentProblem: "Current problem",
+          currentProblemPlaceholder: "What is difficult or missing today?",
+          proposal: "Proposal",
+          proposalPlaceholder: "What would you like to see added or changed?",
+          useCase: "Use case",
+          useCasePlaceholder: "When would this feature help you most?",
+          contact: "Contact details",
+          contactPlaceholder: "Optional email, handle, or note for follow-up",
+          contactHint: "Optional. Leave blank if you do not want a response.",
+          honeypotLabel: "Leave this field empty",
+          submitIdle: "Send feedback",
+          submitLoading: "Sending...",
+          successTitle: "Thanks for the feedback.",
+          successBody: "Your note has been recorded and will help shape the next iteration.",
+          successBodyWithId: "Your feedback was submitted successfully. Reference ID: {id}.",
+          statusGeneric: "Please check the form and try again.",
+          statusUnavailable: "The feedback service is temporarily unavailable. Please try again later.",
+        },
+        zh: {
+          lang: "zh-CN",
+          seoTitle: "CyberShiba | 提交反馈",
+          descriptionMeta:
+            "向 CyberShiba、AI Info 和 Resume Maker 提交问题反馈与功能建议。",
+          eyebrow: "CyberShiba Feedback",
+          languageSwitcher: "语言切换",
+          heroTitle: "提交能推动产品改进的反馈。",
+          supportIntro:
+            "你可以为 portal、AI Info 或 Resume Maker 提交问题反馈或功能建议。表单会根据反馈类型自动切换对应字段。",
+          feedbackType: "反馈类型",
+          feedbackTypeBug: "问题反馈",
+          feedbackTypeFeature: "功能建议",
+          product: "产品",
+          productPortal: "CyberShiba Portal",
+          productAiInfo: "AI Info",
+          productResumeMaker: "Resume Maker",
+          title: "简要标题",
+          titlePlaceholder: "概括这个问题或建议",
+          pageUrl: "页面 URL",
+          pageUrlPlaceholder: "https://www.cybershiba.cn/...",
+          pageUrlHint: "如果可以，会自动带入你刚才所在的页面地址。",
+          bugDetails: "问题详情",
+          bugIntro: "请描述如何复现这个问题，以及你原本预期会发生什么。",
+          steps: "复现步骤",
+          stepsPlaceholder: "按顺序列出触发问题的具体步骤",
+          expectedResult: "预期结果",
+          expectedResultPlaceholder: "原本应该发生什么？",
+          actualResult: "实际结果",
+          actualResultPlaceholder: "实际发生了什么？",
+          featureDetails: "功能详情",
+          featureIntro: "请说明当前痛点、你的想法，以及这个功能最重要的使用场景。",
+          currentProblem: "当前问题",
+          currentProblemPlaceholder: "现在最困难或缺失的部分是什么？",
+          proposal: "你的方案",
+          proposalPlaceholder: "你希望新增或调整什么？",
+          useCase: "使用场景",
+          useCasePlaceholder: "这个功能在什么场景下最有帮助？",
+          contact: "联系方式",
+          contactPlaceholder: "可选：邮箱、账号名，或方便后续联系的备注",
+          contactHint: "选填。如果你不希望收到回复，可以留空。",
+          honeypotLabel: "请将此字段留空",
+          submitIdle: "提交反馈",
+          submitLoading: "提交中...",
+          successTitle: "感谢你的反馈。",
+          successBody: "你的反馈已记录，我们会将其纳入后续迭代参考。",
+          successBodyWithId: "你的反馈已成功提交，参考编号：{id}。",
+          statusGeneric: "请检查表单内容后再试一次。",
+          statusUnavailable: "反馈服务暂时不可用，请稍后再试。",
+        },
+      };
+
+      const form = document.getElementById("feedback-form");
+      const feedbackTypeField = document.getElementById("feedback-type");
+      const productField = document.getElementById("product");
+      const pageUrlField = document.getElementById("page-url");
+      const bugFields = document.getElementById("bug-fields");
+      const featureFields = document.getElementById("feature-fields");
+      const statusNode = document.getElementById("form-status");
+      const successState = document.getElementById("success-state");
+      const successMessage = document.getElementById("success-message");
+      const submitButton = document.getElementById("submit-button");
+      const langButtons = document.querySelectorAll("[data-lang-button]");
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+
+      const bugFieldNames = ["steps", "expectedResult", "actualResult"];
+      const featureFieldNames = ["currentProblem", "proposal", "useCase"];
+      let currentLanguage = "en";
+      let currentStatusKey = "";
+      let successReferenceId = "";
+
+      function getMessage(language = currentLanguage) {
+        return messages[language] ?? messages.en;
+      }
+
+      function formatMessage(template, values) {
+        return template.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
+      }
+
+      function setStatus(message) {
+        if (!message) {
+          statusNode.textContent = "";
+          statusNode.classList.remove("is-visible");
+          currentStatusKey = "";
+          return;
+        }
+
+        statusNode.textContent = message;
+        statusNode.classList.add("is-visible");
+      }
+
+      function setSectionState(section, fieldNames, isActive) {
+        section.hidden = !isActive;
+        fieldNames.forEach((fieldName) => {
+          const field = form.elements[fieldName];
+          if (!(field instanceof HTMLElement)) {
+            return;
+          }
+
+          if ("required" in field) {
+            field.required = isActive;
+          }
+
+          if ("disabled" in field) {
+            field.disabled = !isActive;
+          }
+        });
+      }
+
+      function syncFeedbackType() {
+        const isBug = feedbackTypeField.value === "bug";
+        setSectionState(bugFields, bugFieldNames, isBug);
+        setSectionState(featureFields, featureFieldNames, !isBug);
+      }
+
+      function getDefaultPageUrl() {
+        if (document.referrer) {
+          return document.referrer;
+        }
+
+        return location.href;
+      }
+
+      function getSourcePath() {
+        return location.pathname + location.search + location.hash;
+      }
+
+      function getErrorMessage(status, serverErrorMessage = "") {
+        const message = getMessage();
+        const hasServerErrorMessage =
+          typeof serverErrorMessage === "string" && serverErrorMessage.trim().length > 0;
+
+        if ((status === 400 || status === 429) && hasServerErrorMessage) {
+          return serverErrorMessage.trim();
+        }
+
+        if (status === 400 || status === 429) {
+          return message.statusGeneric;
+        }
+
+        if (status === 500 || status === 502) {
+          return message.statusUnavailable;
+        }
+
+        return message.statusGeneric;
+      }
+
+      function prefillProductFromQuery() {
+        const params = new URLSearchParams(location.search);
+        const product = params.get("product");
+
+        if (product && PRODUCTS.includes(product)) {
+          productField.value = product;
+        }
+      }
+
+      function setLanguage(language) {
+        const normalizedLanguage = messages[language] ? language : "en";
+        const message = getMessage(normalizedLanguage);
+
+        currentLanguage = normalizedLanguage;
+        document.documentElement.lang = message.lang;
+        document.title = message.seoTitle;
+        descriptionMeta?.setAttribute("content", message.descriptionMeta);
+
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          if (key && message[key]) {
+            node.textContent = message[key];
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-placeholder");
+          if (key && message[key]) {
+            node.setAttribute("placeholder", message[key]);
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-option-label]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-option-label");
+          if (key && message[key]) {
+            node.textContent = message[key];
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-aria-label");
+          if (key && message[key]) {
+            node.setAttribute("aria-label", message[key]);
+          }
+        });
+
+        if (submitButton.disabled) {
+          submitButton.textContent = message.submitLoading;
+        } else {
+          submitButton.textContent = message.submitIdle;
+        }
+
+        if (currentStatusKey && statusNode.classList.contains("is-visible")) {
+          setStatus(message[currentStatusKey] || message.statusGeneric);
+        }
+
+        if (successReferenceId) {
+          successMessage.textContent = formatMessage(message.successBodyWithId, {
+            id: successReferenceId,
+          });
+        } else {
+          successMessage.textContent = message.successBody;
+        }
+
+        langButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.langButton === normalizedLanguage);
+        });
+
+        try {
+          localStorage.setItem("cybershiba-feedback-language", normalizedLanguage);
+        } catch (error) {
+          /* no-op */
+        }
+      }
+
+      function getInitialLanguage() {
+        try {
+          const storedLanguage = localStorage.getItem("cybershiba-feedback-language");
+          if (storedLanguage && messages[storedLanguage]) {
+            return storedLanguage;
+          }
+        } catch (error) {
+          /* no-op */
+        }
+
+        return navigator.language && navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
+      }
+
+      async function handleSubmit(event) {
+        event.preventDefault();
+        setStatus("");
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        if (!pageUrlField.value.trim()) {
+          pageUrlField.value = getDefaultPageUrl();
+        }
+
+        const formData = new FormData(form);
+        const payload = {
+          feedbackType: String(formData.get("feedbackType") || "").trim(),
+          product: String(formData.get("product") || "").trim(),
+          title: String(formData.get("title") || "").trim(),
+          contact: String(formData.get("contact") || "").trim(),
+          steps: String(formData.get("steps") || "").trim(),
+          expectedResult: String(formData.get("expectedResult") || "").trim(),
+          actualResult: String(formData.get("actualResult") || "").trim(),
+          currentProblem: String(formData.get("currentProblem") || "").trim(),
+          proposal: String(formData.get("proposal") || "").trim(),
+          useCase: String(formData.get("useCase") || "").trim(),
+          honeypot: String(formData.get("honeypot") || ""),
+          pageUrl: String(formData.get("pageUrl") || "").trim(),
+          sourcePath: getSourcePath(),
+          referrer: document.referrer || "",
+          userAgent: navigator.userAgent || "",
+          locale: navigator.language || "",
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = getMessage().submitLoading;
+
+        let response;
+        let body = null;
+
+        try {
+          response = await fetch("/api/feedback", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+        } catch (error) {
+          currentStatusKey = "statusUnavailable";
+          setStatus(getMessage().statusUnavailable);
+          submitButton.disabled = false;
+          submitButton.textContent = getMessage().submitIdle;
+          return;
+        }
+
+        try {
+          body = await response.json();
+        } catch (error) {
+          body = null;
+        }
+
+        if (response.status === 201) {
+          form.hidden = true;
+          successState.classList.add("is-visible");
+          successReferenceId = "";
+          successMessage.textContent = getMessage().successBody;
+
+          if (body && typeof body.id === "string" && body.id.length > 0) {
+            successReferenceId = body.id;
+            successMessage.textContent = formatMessage(getMessage().successBodyWithId, {
+              id: body.id,
+            });
+          }
+
+          return;
+        }
+
+        const serverErrorMessage =
+          body && typeof body.error === "string" ? body.error.trim() : "";
+
+        currentStatusKey =
+          serverErrorMessage && (response.status === 400 || response.status === 429)
+            ? ""
+            : response.status === 500 || response.status === 502
+              ? "statusUnavailable"
+              : "statusGeneric";
+        setStatus(getErrorMessage(response.status, serverErrorMessage));
+        submitButton.disabled = false;
+        submitButton.textContent = getMessage().submitIdle;
+      }
+
+      prefillProductFromQuery();
+      pageUrlField.value = getDefaultPageUrl();
+      syncFeedbackType();
+      setLanguage(getInitialLanguage());
+
+      feedbackTypeField.addEventListener("change", syncFeedbackType);
+      form.addEventListener("submit", handleSubmit);
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setLanguage(button.dataset.langButton || "en");
+        });
+      });
+    </script>
+  </body>
+</html>
