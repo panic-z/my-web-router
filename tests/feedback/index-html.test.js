@@ -10,3 +10,11 @@ test("feedback form calls native validity checks before submitting", () => {
   assert.match(html, /checkValidity\(\)/);
   assert.match(html, /reportValidity\(\)/);
 });
+
+test("feedback page includes bilingual language-switch content", () => {
+  assert.match(html, /data-lang-button="en"/);
+  assert.match(html, /data-lang-button="zh"/);
+  assert.match(html, /const messages = \{/);
+  assert.match(html, /submitIdle/);
+  assert.match(html, /submitLoading/);
+});

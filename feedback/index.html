@@ -51,12 +51,42 @@
         backdrop-filter: blur(8px);
       }
 
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
       .eyebrow {
         margin: 0;
         color: var(--accent-strong);
         font-size: 12px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
+      }
+
+      .lang-switch {
+        display: inline-flex;
+        gap: 8px;
+        padding: 6px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.66);
+      }
+
+      .lang-switch button {
+        border: 0;
+        border-radius: 999px;
+        padding: 8px 12px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .lang-switch button.is-active {
+        background: rgba(124, 45, 18, 0.12);
+        color: var(--accent-strong);
       }
 
       h1 {
@@ -244,9 +274,15 @@
   </head>
   <body>
     <main>
-      <p class="eyebrow">CyberShiba Feedback</p>
-      <h1>Share feedback that improves the product.</h1>
-      <p class="intro">
+      <div class="topbar">
+        <p class="eyebrow" data-i18n="eyebrow">CyberShiba Feedback</p>
+        <div class="lang-switch" data-i18n-aria-label="languageSwitcher" aria-label="Language switcher">
+          <button type="button" class="is-active" data-lang-button="en">EN</button>
+          <button type="button" data-lang-button="zh">中文</button>
+        </div>
+      </div>
+      <h1 data-i18n="heroTitle">Share feedback that improves the product.</h1>
+      <p class="intro" data-i18n="supportIntro">
         Send a bug report or feature request for the portal, AI Info, or Resume Maker.
         The form adapts to the kind of feedback you are sending.
       </p>
@@ -255,78 +291,83 @@
         <div class="field-grid">
           <div class="split">
             <label>
-              <span class="field-label">Feedback type</span>
+              <span class="field-label" data-i18n="feedbackType">Feedback type</span>
               <select id="feedback-type" name="feedbackType" required>
-                <option value="bug">Bug report</option>
-                <option value="feature">Feature request</option>
+                <option value="bug" data-i18n-option-label="feedbackTypeBug">Bug report</option>
+                <option value="feature" data-i18n-option-label="feedbackTypeFeature">Feature request</option>
               </select>
             </label>
 
             <label>
-              <span class="field-label">Product</span>
+              <span class="field-label" data-i18n="product">Product</span>
               <select id="product" name="product" required>
-                <option value="portal">CyberShiba Portal</option>
-                <option value="ai-info">AI Info</option>
-                <option value="resume-maker">Resume Maker</option>
+                <option value="portal" data-i18n-option-label="productPortal">CyberShiba Portal</option>
+                <option value="ai-info" data-i18n-option-label="productAiInfo">AI Info</option>
+                <option value="resume-maker" data-i18n-option-label="productResumeMaker">Resume Maker</option>
               </select>
             </label>
           </div>
 
           <label>
-            <span class="field-label">Short title</span>
+            <span class="field-label" data-i18n="title">Short title</span>
             <input
               id="title"
               name="title"
               type="text"
               maxlength="120"
+              data-i18n-placeholder="titlePlaceholder"
               placeholder="Summarize the issue or request"
               required
             />
           </label>
 
           <label>
-            <span class="field-label">Page URL</span>
+            <span class="field-label" data-i18n="pageUrl">Page URL</span>
             <input
               id="page-url"
               name="pageUrl"
               type="url"
               maxlength="500"
+              data-i18n-placeholder="pageUrlPlaceholder"
               placeholder="https://www.cybershiba.cn/..."
             />
-            <span class="hint">Pre-filled from the page you came from when possible.</span>
+            <span class="hint" data-i18n="pageUrlHint">Pre-filled from the page you came from when possible.</span>
           </label>
 
           <section id="bug-fields" class="group-card">
-            <h2>Bug details</h2>
-            <p>Describe how to reproduce the issue and what you expected to happen.</p>
+            <h2 data-i18n="bugDetails">Bug details</h2>
+            <p data-i18n="bugIntro">Describe how to reproduce the issue and what you expected to happen.</p>
             <div class="field-grid">
               <label>
-                <span class="field-label">Steps to reproduce</span>
+                <span class="field-label" data-i18n="steps">Steps to reproduce</span>
                 <textarea
                   id="steps"
                   name="steps"
                   maxlength="3000"
+                  data-i18n-placeholder="stepsPlaceholder"
                   placeholder="List the exact steps that lead to the problem"
                 ></textarea>
               </label>
 
               <div class="split">
                 <label>
-                  <span class="field-label">Expected result</span>
+                  <span class="field-label" data-i18n="expectedResult">Expected result</span>
                   <textarea
                     id="expected-result"
                     name="expectedResult"
                     maxlength="2000"
+                    data-i18n-placeholder="expectedResultPlaceholder"
                     placeholder="What should have happened?"
                   ></textarea>
                 </label>
 
                 <label>
-                  <span class="field-label">Actual result</span>
+                  <span class="field-label" data-i18n="actualResult">Actual result</span>
                   <textarea
                     id="actual-result"
                     name="actualResult"
                     maxlength="2000"
+                    data-i18n-placeholder="actualResultPlaceholder"
                     placeholder="What happened instead?"
                   ></textarea>
                 </label>
@@ -335,35 +376,38 @@
           </section>
 
           <section id="feature-fields" class="group-card" hidden>
-            <h2>Feature details</h2>
-            <p>Explain the pain point, your idea, and the situation where it matters.</p>
+            <h2 data-i18n="featureDetails">Feature details</h2>
+            <p data-i18n="featureIntro">Explain the pain point, your idea, and the situation where it matters.</p>
             <div class="field-grid">
               <label>
-                <span class="field-label">Current problem</span>
+                <span class="field-label" data-i18n="currentProblem">Current problem</span>
                 <textarea
                   id="current-problem"
                   name="currentProblem"
                   maxlength="2000"
+                  data-i18n-placeholder="currentProblemPlaceholder"
                   placeholder="What is difficult or missing today?"
                 ></textarea>
               </label>
 
               <label>
-                <span class="field-label">Proposal</span>
+                <span class="field-label" data-i18n="proposal">Proposal</span>
                 <textarea
                   id="proposal"
                   name="proposal"
                   maxlength="2000"
+                  data-i18n-placeholder="proposalPlaceholder"
                   placeholder="What would you like to see added or changed?"
                 ></textarea>
               </label>
 
               <label>
-                <span class="field-label">Use case</span>
+                <span class="field-label" data-i18n="useCase">Use case</span>
                 <textarea
                   id="use-case"
                   name="useCase"
                   maxlength="2000"
+                  data-i18n-placeholder="useCasePlaceholder"
                   placeholder="When would this feature help you most?"
                 ></textarea>
               </label>
@@ -371,19 +415,20 @@
           </section>
 
           <label>
-            <span class="field-label">Contact details</span>
+            <span class="field-label" data-i18n="contact">Contact details</span>
             <input
               id="contact"
               name="contact"
               type="text"
               maxlength="160"
+              data-i18n-placeholder="contactPlaceholder"
               placeholder="Optional email, handle, or note for follow-up"
             />
-            <span class="hint">Optional. Leave blank if you do not want a response.</span>
+            <span class="hint" data-i18n="contactHint">Optional. Leave blank if you do not want a response.</span>
           </label>
 
           <label class="honeypot" aria-hidden="true">
-            <span>Leave this field empty</span>
+            <span data-i18n="honeypotLabel">Leave this field empty</span>
             <input id="company" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
           </label>
 
@@ -391,13 +436,13 @@
         </div>
 
         <div class="actions">
-          <button id="submit-button" type="submit">Send feedback</button>
+          <button id="submit-button" type="submit" data-i18n="submitIdle">Send feedback</button>
         </div>
       </form>
 
       <section id="success-state" class="success-state" aria-live="polite">
-        <h2>Thanks for the feedback.</h2>
-        <p id="success-message">
+        <h2 data-i18n="successTitle">Thanks for the feedback.</h2>
+        <p id="success-message" data-i18n="successBody">
           Your note has been recorded and will help shape the next iteration.
         </p>
       </section>
@@ -405,6 +450,108 @@
 
     <script>
       const PRODUCTS = ["portal", "ai-info", "resume-maker"];
+      const messages = {
+        en: {
+          lang: "en",
+          seoTitle: "CyberShiba | Share Feedback",
+          descriptionMeta:
+            "Share bug reports and feature requests for CyberShiba, AI Info, and Resume Maker.",
+          eyebrow: "CyberShiba Feedback",
+          languageSwitcher: "Language switcher",
+          heroTitle: "Share feedback that improves the product.",
+          supportIntro:
+            "Send a bug report or feature request for the portal, AI Info, or Resume Maker. The form adapts to the kind of feedback you are sending.",
+          feedbackType: "Feedback type",
+          feedbackTypeBug: "Bug report",
+          feedbackTypeFeature: "Feature request",
+          product: "Product",
+          productPortal: "CyberShiba Portal",
+          productAiInfo: "AI Info",
+          productResumeMaker: "Resume Maker",
+          title: "Short title",
+          titlePlaceholder: "Summarize the issue or request",
+          pageUrl: "Page URL",
+          pageUrlPlaceholder: "https://www.cybershiba.cn/...",
+          pageUrlHint: "Pre-filled from the page you came from when possible.",
+          bugDetails: "Bug details",
+          bugIntro: "Describe how to reproduce the issue and what you expected to happen.",
+          steps: "Steps to reproduce",
+          stepsPlaceholder: "List the exact steps that lead to the problem",
+          expectedResult: "Expected result",
+          expectedResultPlaceholder: "What should have happened?",
+          actualResult: "Actual result",
+          actualResultPlaceholder: "What happened instead?",
+          featureDetails: "Feature details",
+          featureIntro: "Explain the pain point, your idea, and the situation where it matters.",
+          currentProblem: "Current problem",
+          currentProblemPlaceholder: "What is difficult or missing today?",
+          proposal: "Proposal",
+          proposalPlaceholder: "What would you like to see added or changed?",
+          useCase: "Use case",
+          useCasePlaceholder: "When would this feature help you most?",
+          contact: "Contact details",
+          contactPlaceholder: "Optional email, handle, or note for follow-up",
+          contactHint: "Optional. Leave blank if you do not want a response.",
+          honeypotLabel: "Leave this field empty",
+          submitIdle: "Send feedback",
+          submitLoading: "Sending...",
+          successTitle: "Thanks for the feedback.",
+          successBody: "Your note has been recorded and will help shape the next iteration.",
+          successBodyWithId: "Your feedback was submitted successfully. Reference ID: {id}.",
+          statusGeneric: "Please check the form and try again.",
+          statusUnavailable: "The feedback service is temporarily unavailable. Please try again later.",
+        },
+        zh: {
+          lang: "zh-CN",
+          seoTitle: "CyberShiba | 提交反馈",
+          descriptionMeta:
+            "向 CyberShiba、AI Info 和 Resume Maker 提交问题反馈与功能建议。",
+          eyebrow: "CyberShiba Feedback",
+          languageSwitcher: "语言切换",
+          heroTitle: "提交能推动产品改进的反馈。",
+          supportIntro:
+            "你可以为 portal、AI Info 或 Resume Maker 提交问题反馈或功能建议。表单会根据反馈类型自动切换对应字段。",
+          feedbackType: "反馈类型",
+          feedbackTypeBug: "问题反馈",
+          feedbackTypeFeature: "功能建议",
+          product: "产品",
+          productPortal: "CyberShiba Portal",
+          productAiInfo: "AI Info",
+          productResumeMaker: "Resume Maker",
+          title: "简要标题",
+          titlePlaceholder: "概括这个问题或建议",
+          pageUrl: "页面 URL",
+          pageUrlPlaceholder: "https://www.cybershiba.cn/...",
+          pageUrlHint: "如果可以，会自动带入你刚才所在的页面地址。",
+          bugDetails: "问题详情",
+          bugIntro: "请描述如何复现这个问题，以及你原本预期会发生什么。",
+          steps: "复现步骤",
+          stepsPlaceholder: "按顺序列出触发问题的具体步骤",
+          expectedResult: "预期结果",
+          expectedResultPlaceholder: "原本应该发生什么？",
+          actualResult: "实际结果",
+          actualResultPlaceholder: "实际发生了什么？",
+          featureDetails: "功能详情",
+          featureIntro: "请说明当前痛点、你的想法，以及这个功能最重要的使用场景。",
+          currentProblem: "当前问题",
+          currentProblemPlaceholder: "现在最困难或缺失的部分是什么？",
+          proposal: "你的方案",
+          proposalPlaceholder: "你希望新增或调整什么？",
+          useCase: "使用场景",
+          useCasePlaceholder: "这个功能在什么场景下最有帮助？",
+          contact: "联系方式",
+          contactPlaceholder: "可选：邮箱、账号名，或方便后续联系的备注",
+          contactHint: "选填。如果你不希望收到回复，可以留空。",
+          honeypotLabel: "请将此字段留空",
+          submitIdle: "提交反馈",
+          submitLoading: "提交中...",
+          successTitle: "感谢你的反馈。",
+          successBody: "你的反馈已记录，我们会将其纳入后续迭代参考。",
+          successBodyWithId: "你的反馈已成功提交，参考编号：{id}。",
+          statusGeneric: "请检查表单内容后再试一次。",
+          statusUnavailable: "反馈服务暂时不可用，请稍后再试。",
+        },
+      };
 
       const form = document.getElementById("feedback-form");
       const feedbackTypeField = document.getElementById("feedback-type");
@@ -416,14 +563,28 @@
       const successState = document.getElementById("success-state");
       const successMessage = document.getElementById("success-message");
       const submitButton = document.getElementById("submit-button");
+      const langButtons = document.querySelectorAll("[data-lang-button]");
+      const descriptionMeta = document.querySelector('meta[name="description"]');
 
       const bugFieldNames = ["steps", "expectedResult", "actualResult"];
       const featureFieldNames = ["currentProblem", "proposal", "useCase"];
+      let currentLanguage = "en";
+      let currentStatusKey = "";
+      let successReferenceId = "";
+
+      function getMessage(language = currentLanguage) {
+        return messages[language] ?? messages.en;
+      }
+
+      function formatMessage(template, values) {
+        return template.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
+      }
 
       function setStatus(message) {
         if (!message) {
           statusNode.textContent = "";
           statusNode.classList.remove("is-visible");
+          currentStatusKey = "";
           return;
         }
 
@@ -467,18 +628,18 @@
         return location.pathname + location.search + location.hash;
       }
 
-      function getErrorMessage(status, body) {
+      function getErrorMessage(status) {
+        const message = getMessage();
+
         if (status === 400 || status === 429) {
-          return body && typeof body.error === "string"
-            ? body.error
-            : "Please check the form and try again.";
+          return message.statusGeneric;
         }
 
         if (status === 500 || status === 502) {
-          return "The feedback service is temporarily unavailable. Please try again later.";
+          return message.statusUnavailable;
         }
 
-        return "Something went wrong while sending feedback.";
+        return message.statusGeneric;
       }
 
       function prefillProductFromQuery() {
@@ -488,6 +649,85 @@
         if (product && PRODUCTS.includes(product)) {
           productField.value = product;
         }
+      }
+
+      function setLanguage(language) {
+        const normalizedLanguage = messages[language] ? language : "en";
+        const message = getMessage(normalizedLanguage);
+
+        currentLanguage = normalizedLanguage;
+        document.documentElement.lang = message.lang;
+        document.title = message.seoTitle;
+        descriptionMeta?.setAttribute("content", message.descriptionMeta);
+
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          if (key && message[key]) {
+            node.textContent = message[key];
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-placeholder");
+          if (key && message[key]) {
+            node.setAttribute("placeholder", message[key]);
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-option-label]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-option-label");
+          if (key && message[key]) {
+            node.textContent = message[key];
+          }
+        });
+
+        document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-aria-label");
+          if (key && message[key]) {
+            node.setAttribute("aria-label", message[key]);
+          }
+        });
+
+        if (submitButton.disabled) {
+          submitButton.textContent = message.submitLoading;
+        } else {
+          submitButton.textContent = message.submitIdle;
+        }
+
+        if (currentStatusKey && statusNode.classList.contains("is-visible")) {
+          setStatus(message[currentStatusKey] || message.statusGeneric);
+        }
+
+        if (successReferenceId) {
+          successMessage.textContent = formatMessage(message.successBodyWithId, {
+            id: successReferenceId,
+          });
+        } else {
+          successMessage.textContent = message.successBody;
+        }
+
+        langButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.langButton === normalizedLanguage);
+        });
+
+        try {
+          localStorage.setItem("cybershiba-feedback-language", normalizedLanguage);
+        } catch (error) {
+          /* no-op */
+        }
+      }
+
+      function getInitialLanguage() {
+        try {
+          const storedLanguage = localStorage.getItem("cybershiba-feedback-language");
+          if (storedLanguage && messages[storedLanguage]) {
+            return storedLanguage;
+          }
+        } catch (error) {
+          /* no-op */
+        }
+
+        return navigator.language && navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
       }
 
       async function handleSubmit(event) {
@@ -524,7 +764,7 @@
         };
 
         submitButton.disabled = true;
-        submitButton.textContent = "Sending...";
+        submitButton.textContent = getMessage().submitLoading;
 
         let response;
         let body = null;
@@ -538,9 +778,10 @@
             body: JSON.stringify(payload),
           });
         } catch (error) {
-          setStatus("The feedback service is temporarily unavailable. Please try again later.");
+          currentStatusKey = "statusUnavailable";
+          setStatus(getMessage().statusUnavailable);
           submitButton.disabled = false;
-          submitButton.textContent = "Send feedback";
+          submitButton.textContent = getMessage().submitIdle;
           return;
         }
 
@@ -553,26 +794,38 @@
         if (response.status === 201) {
           form.hidden = true;
           successState.classList.add("is-visible");
+          successReferenceId = "";
+          successMessage.textContent = getMessage().successBody;
 
           if (body && typeof body.id === "string" && body.id.length > 0) {
-            successMessage.textContent =
-              "Your feedback was submitted successfully. Reference ID: " + body.id + ".";
+            successReferenceId = body.id;
+            successMessage.textContent = formatMessage(getMessage().successBodyWithId, {
+              id: body.id,
+            });
           }
 
           return;
         }
 
-        setStatus(getErrorMessage(response.status, body));
+        currentStatusKey =
+          response.status === 500 || response.status === 502 ? "statusUnavailable" : "statusGeneric";
+        setStatus(getErrorMessage(response.status));
         submitButton.disabled = false;
-        submitButton.textContent = "Send feedback";
+        submitButton.textContent = getMessage().submitIdle;
       }
 
       prefillProductFromQuery();
       pageUrlField.value = getDefaultPageUrl();
       syncFeedbackType();
+      setLanguage(getInitialLanguage());
 
       feedbackTypeField.addEventListener("change", syncFeedbackType);
       form.addEventListener("submit", handleSubmit);
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setLanguage(button.dataset.langButton || "en");
+        });
+      });
     </script>
   </body>
 </html>
