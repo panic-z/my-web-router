@@ -18,3 +18,25 @@ test("feedback page includes bilingual language-switch content", () => {
   assert.match(html, /submitIdle/);
   assert.match(html, /submitLoading/);
 });
+
+test("feedback submit errors prefer server messages for 400 and 429", () => {
+  assert.match(html, /body\.error/);
+
+  const helperStart = html.indexOf('      function getErrorMessage(status, serverErrorMessage = "") {');
+  const helperEnd = html.indexOf("      function prefillProductFromQuery() {", helperStart);
+
+  assert.ok(helperStart >= 0 && helperEnd > helperStart, "expected getErrorMessage helper to be present");
+
+  const helperSource = html.slice(helperStart, helperEnd).trimEnd();
+
+  const getErrorMessage = new Function(
+    "getMessage",
+    `${helperSource}\nreturn getErrorMessage;`,
+  )(() => ({
+    statusGeneric: "localized generic",
+    statusUnavailable: "localized unavailable",
+  }));
+
+  assert.equal(getErrorMessage(400, "Server says no"), "Server says no");
+  assert.equal(getErrorMessage(429, ""), "localized generic");
+});

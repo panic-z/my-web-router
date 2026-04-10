@@ -628,8 +628,14 @@
         return location.pathname + location.search + location.hash;
       }
 
-      function getErrorMessage(status) {
+      function getErrorMessage(status, serverErrorMessage = "") {
         const message = getMessage();
+        const hasServerErrorMessage =
+          typeof serverErrorMessage === "string" && serverErrorMessage.trim().length > 0;
+
+        if ((status === 400 || status === 429) && hasServerErrorMessage) {
+          return serverErrorMessage.trim();
+        }
 
         if (status === 400 || status === 429) {
           return message.statusGeneric;
@@ -807,9 +813,16 @@
           return;
         }
 
+        const serverErrorMessage =
+          body && typeof body.error === "string" ? body.error.trim() : "";
+
         currentStatusKey =
-          response.status === 500 || response.status === 502 ? "statusUnavailable" : "statusGeneric";
-        setStatus(getErrorMessage(response.status));
+          serverErrorMessage && (response.status === 400 || response.status === 429)
+            ? ""
+            : response.status === 500 || response.status === 502
+              ? "statusUnavailable"
+              : "statusGeneric";
+        setStatus(getErrorMessage(response.status, serverErrorMessage));
         submitButton.disabled = false;
         submitButton.textContent = getMessage().submitIdle;
       }
