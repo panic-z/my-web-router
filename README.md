@@ -7,10 +7,20 @@ Vercel routing layer that serves one domain across two existing deployments:
 - `/ai-info` and its subpaths rewrite to `ai-info`
 - `/resume-maker` and its subpaths rewrite to `resume-maker`
 
+## Feedback Links
+
+Upstream apps should link to these product-level entry URLs:
+
+- Portal: `https://www.cybershiba.cn/feedback?product=portal`
+- AI Info: `https://www.cybershiba.cn/feedback?product=ai-info`
+- Resume Maker: `https://www.cybershiba.cn/feedback?product=resume-maker`
+
 ## Environment variables
 
-- This project currently uses fixed external rewrites in `vercel.json`
-- `AI_INFO_ORIGIN` and `RESUME_MAKER_ORIGIN` are no longer required for routing
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `AI_INFO_ORIGIN` and `RESUME_MAKER_ORIGIN` are reserved for upstream origins if you switch back to environment-based rewrites
+- Create a `feedback_submissions` table before using the feedback submission API
 
 ## Deploy
 

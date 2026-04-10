@@ -1,0 +1,7 @@
+{
+  "name": "my-web-router",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/**/*.test.js"
+  }
+}
