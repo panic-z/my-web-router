@@ -3,52 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CyberShiba | AI Info and Resume Maker</title>
+    <title>CyberShiba | AI News Hub, Resume Builder, and Web Tools</title>
     <meta
       name="description"
-      content="CyberShiba is the shared gateway to AI Info and Resume Maker. Explore curated AI news, build a polished resume, or open support for the portal in your browser."
+      content="Explore curated AI news, use a free markdown resume builder with PDF export, and access practical web tools from CyberShiba."
+    />
+    <meta
+      name="keywords"
+      content="AI news hub, AI research updates, resume builder, markdown resume builder, PDF resume export, web tools, CyberShiba"
     />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="https://www.cybershiba.cn/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="CyberShiba" />
-    <meta property="og:title" content="CyberShiba | AI Info and Resume Maker" />
+    <meta property="og:title" content="CyberShiba | AI News Hub, Resume Builder, and Web Tools" />
     <meta
       property="og:description"
-      content="Open AI Info for curated AI updates, jump into Resume Maker to create and export a polished resume, or open support for the portal."
+      content="Open AI Info for curated AI updates, launch Resume Maker to write and export a polished resume, or reach support from the CyberShiba portal."
     />
     <meta property="og:url" content="https://www.cybershiba.cn/" />
+    <meta property="og:image" content="https://www.cybershiba.cn/portal-og.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CyberShiba | AI Info and Resume Maker" />
+    <meta name="twitter:title" content="CyberShiba | AI News Hub, Resume Builder, and Web Tools" />
     <meta
       name="twitter:description"
-      content="A shared entry point for AI Info, Resume Maker, and portal support on CyberShiba."
+      content="Curated AI news, a browser-based markdown resume builder, and practical web tools in one portal."
     />
+    <meta name="twitter:image" content="https://www.cybershiba.cn/portal-og.svg" />
     <script type="application/ld+json" id="structured-data">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "CyberShiba",
-        "url": "https://www.cybershiba.cn/",
-        "description": "A shared entry point for AI Info, Resume Maker, and portal support.",
-        "hasPart": [
-          {
-            "@type": "WebSite",
-            "name": "AI Info",
-            "url": "https://www.cybershiba.cn/ai-info"
-          },
-          {
-            "@type": "WebApplication",
-            "name": "Resume Maker",
-            "url": "https://www.cybershiba.cn/resume-maker"
-          },
-          {
-            "@type": "WebPage",
-            "name": "Support",
-            "url": "https://www.cybershiba.cn/feedback?product=portal"
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "CyberShiba",
+          "url": "https://www.cybershiba.cn/",
+          "logo": "https://www.cybershiba.cn/portal-og.svg",
+          "sameAs": [
+            "https://www.cybershiba.cn/ai-info",
+            "https://www.cybershiba.cn/resume-maker"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "CyberShiba",
+          "url": "https://www.cybershiba.cn/",
+          "description": "A search-friendly home for AI Info, Resume Maker, and practical web tools from CyberShiba.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "CyberShiba"
           }
-        ]
-      }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "CyberShiba tools",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "AI Info",
+              "url": "https://www.cybershiba.cn/ai-info"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Resume Maker",
+              "url": "https://www.cybershiba.cn/resume-maker"
+            }
+          ]
+        }
+      ]
     </script>
     <script>
       window.va =
@@ -182,6 +209,40 @@
         margin-top: 32px;
       }
 
+      section {
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      ul {
+        margin: 16px 0 0;
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      dl {
+        margin: 18px 0 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      dt {
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      dd {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
       a {
         display: flex;
         justify-content: space-between;
@@ -225,6 +286,20 @@
         This is the shared entry point. You can head into the AI news hub, open
         the resume builder directly, or use the support link below.
       </p>
+      <section aria-labelledby="platform-summary-title">
+        <h2 id="platform-summary-title" data-i18n="platformSummaryTitle">
+          One place for AI updates and practical browser tools
+        </h2>
+        <p data-i18n="platformSummaryBody">
+          CyberShiba helps you monitor AI news and research, jump into a markdown resume builder,
+          and access lightweight tools without creating an account first.
+        </p>
+        <ul>
+          <li data-i18n="platformPointOne">AI Info tracks research, engineering posts, and product launches from leading labs.</li>
+          <li data-i18n="platformPointTwo">Resume Maker lets you draft in Markdown, preview templates live, and export polished resumes as PDF or HTML.</li>
+          <li data-i18n="platformPointThree">The portal keeps these tools accessible from one clean starting point on CyberShiba.</li>
+        </ul>
+      </section>
       <p class="support-copy">
         <span data-i18n="supportPrompt">Need to report a bug or suggest an improvement?</span>
         <a class="support-link" href="/feedback?product=portal" data-i18n="supportLink">
@@ -241,44 +316,105 @@
           <span>/resume-maker</span>
         </a>
       </nav>
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title" data-i18n="faqTitle">Frequently asked questions</h2>
+        <dl>
+          <div>
+            <dt data-i18n="faqPortalQuestion">What is CyberShiba for?</dt>
+            <dd data-i18n="faqPortalAnswer">
+              It is the shared entry point for AI Info, Resume Maker, and support, so visitors can discover the right tool without hunting across separate sites.
+            </dd>
+          </div>
+          <div>
+            <dt data-i18n="faqAiInfoQuestion">What can I do in AI Info?</dt>
+            <dd data-i18n="faqAiInfoAnswer">
+              AI Info curates AI news, research, engineering posts, and other updates from major labs, companies, and communities.
+            </dd>
+          </div>
+          <div>
+            <dt data-i18n="faqResumeQuestion">What can I do in Resume Maker?</dt>
+            <dd data-i18n="faqResumeAnswer">
+              Resume Maker is a browser-based markdown resume builder with live preview, templates, style controls, and one-click export.
+            </dd>
+          </div>
+        </dl>
+      </section>
     </main>
     <script>
       const messages = {
         en: {
           lang: "en",
-          seoTitle: "CyberShiba | AI Info and Resume Maker",
+          seoTitle: "CyberShiba | AI News Hub, Resume Builder, and Web Tools",
           descriptionMeta:
-            "CyberShiba is the shared gateway to AI Info and Resume Maker. Explore curated AI news, build a polished resume, or open support for the portal in your browser.",
+            "Explore curated AI news, use a free markdown resume builder with PDF export, and access practical web tools from CyberShiba.",
           ogDescription:
-            "Open AI Info for curated AI updates, jump into Resume Maker to create and export a polished resume, or open support for the portal.",
+            "Open AI Info for curated AI updates, launch Resume Maker to write and export a polished resume, or reach support from the CyberShiba portal.",
           twitterDescription:
-            "A shared entry point for AI Info, Resume Maker, and portal support on CyberShiba.",
+            "Curated AI news, a browser-based markdown resume builder, and practical web tools in one portal.",
           eyebrow: "CyberShiba Portal",
           heroTitle: "Welcome to CyberShiba",
           description:
-            "This is the shared entry point. You can head into the AI news hub, open the resume builder directly, or use the support link below.",
+            "Use CyberShiba to discover AI news, research roundups, a markdown resume builder, and lightweight web tools from one search-friendly portal.",
+          platformSummaryTitle: "One place for AI updates and practical browser tools",
+          platformSummaryBody:
+            "CyberShiba helps you monitor AI news and research, jump into a markdown resume builder, and access lightweight tools without creating an account first.",
+          platformPointOne:
+            "AI Info tracks research, engineering posts, and product launches from leading labs.",
+          platformPointTwo:
+            "Resume Maker lets you draft in Markdown, preview templates live, and export polished resumes as PDF or HTML.",
+          platformPointThree:
+            "The portal keeps these tools accessible from one clean starting point on CyberShiba.",
           aiInfo: "Open AI Info",
           resumeMaker: "Open Resume Maker",
           supportPrompt: "Need to report a bug or suggest an improvement?",
           supportLink: "Open feedback",
+          faqTitle: "Frequently asked questions",
+          faqPortalQuestion: "What is CyberShiba for?",
+          faqPortalAnswer:
+            "It is the shared entry point for AI Info, Resume Maker, and support, so visitors can discover the right tool without hunting across separate sites.",
+          faqAiInfoQuestion: "What can I do in AI Info?",
+          faqAiInfoAnswer:
+            "AI Info curates AI news, research, engineering posts, and other updates from major labs, companies, and communities.",
+          faqResumeQuestion: "What can I do in Resume Maker?",
+          faqResumeAnswer:
+            "Resume Maker is a browser-based markdown resume builder with live preview, templates, style controls, and one-click export.",
         },
         zh: {
           lang: "zh-CN",
-          seoTitle: "CyberShiba | AI Info 与 Resume Maker",
+          seoTitle: "CyberShiba | AI 资讯、简历生成器与实用 Web 工具",
           descriptionMeta:
-            "CyberShiba 是 AI Info 和 Resume Maker 的统一入口。你可以浏览精选 AI 资讯，开始制作简历，或打开门户支持入口。",
+            "CyberShiba 提供精选 AI 资讯、Markdown 简历生成器和实用 Web 工具入口，帮助你在一个页面里快速开始。",
           ogDescription:
-            "进入 AI Info 获取精选 AI 资讯，打开 Resume Maker 在线制作并导出简历，或打开门户支持入口。",
+            "进入 AI Info 获取精选 AI 动态，打开 Resume Maker 在线制作并导出简历，或从 CyberShiba 门户继续访问其他工具。",
           twitterDescription:
-            "CyberShiba 提供 AI Info、Resume Maker 和门户支持的统一入口。",
+            "在 CyberShiba 一站式进入 AI 资讯、Markdown 简历制作和实用 Web 工具。",
           eyebrow: "CyberShiba Portal",
           heroTitle: "欢迎来到 CyberShiba",
           description:
-            "这里是统一入口。你可以从这里进入 AI 资讯站，直接打开简历制作工具，或使用下面的支持入口。",
+            "这里是统一入口。你可以从这里查看 AI 动态、打开 Markdown 简历制作工具，并继续访问轻量级浏览器工具。",
+          platformSummaryTitle: "一个入口连接 AI 资讯与高频浏览器工具",
+          platformSummaryBody:
+            "CyberShiba 让你在同一页面里浏览 AI 资讯、进入 Markdown 简历编辑器，并快速找到实用的在线工具与支持入口。",
+          platformPointOne:
+            "AI Info 聚合头部实验室和公司的研究、工程文章与产品更新。",
+          platformPointTwo:
+            "Resume Maker 支持 Markdown 写作、模板预览，以及 PDF 或 HTML 导出。",
+          platformPointThree:
+            "门户页把这些能力整合在一起，方便通过搜索直接进入正确的工具。",
           aiInfo: "进入 AI Info",
           resumeMaker: "进入 Resume Maker",
           supportPrompt: "需要报告问题或提出改进建议吗？",
           supportLink: "打开支持",
+          faqTitle: "常见问题",
+          faqPortalQuestion: "CyberShiba 是做什么的？",
+          faqPortalAnswer:
+            "它是 AI Info、Resume Maker 与支持入口的统一首页，帮助访问者快速找到合适的产品。",
+          faqAiInfoQuestion: "AI Info 可以做什么？",
+          faqAiInfoAnswer:
+            "AI Info 聚合主要实验室、公司与社区的 AI 新闻、研究、工程文章和其他更新。",
+          faqResumeQuestion: "Resume Maker 可以做什么？",
+          faqResumeAnswer:
+            "Resume Maker 是浏览器内的 Markdown 简历生成器，支持实时预览、模板、样式控制和一键导出。",
         },
       };
 
@@ -311,31 +447,50 @@
 
         if (structuredData) {
           structuredData.textContent = JSON.stringify(
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "CyberShiba",
-              url: "https://www.cybershiba.cn/",
-              description: message.descriptionMeta,
-              hasPart: [
+            [
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "CyberShiba",
+                url: "https://www.cybershiba.cn/",
+                logo: "https://www.cybershiba.cn/portal-og.svg",
+                sameAs: [
+                  "https://www.cybershiba.cn/ai-info",
+                  "https://www.cybershiba.cn/resume-maker",
+                ],
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "CyberShiba",
+                url: "https://www.cybershiba.cn/",
+                description: message.descriptionMeta,
+                publisher: {
+                  "@type": "Organization",
+                  name: "CyberShiba",
+                },
+                inLanguage: message.lang,
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                name: "CyberShiba tools",
+                itemListElement: [
                 {
-                  "@type": "WebSite",
-                  name: "AI Info",
-                  url: "https://www.cybershiba.cn/ai-info",
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "AI Info",
+                    url: "https://www.cybershiba.cn/ai-info",
                 },
                 {
-                  "@type": "WebApplication",
-                  name: "Resume Maker",
-                  url: "https://www.cybershiba.cn/resume-maker",
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Resume Maker",
+                    url: "https://www.cybershiba.cn/resume-maker",
+                  },
+                ],
                 },
-                {
-                  "@type": "WebPage",
-                  name: "Support",
-                  url: "https://www.cybershiba.cn/feedback?product=portal",
-                },
-              ],
-              inLanguage: message.lang,
-            },
+            ],
             null,
             2
           );
