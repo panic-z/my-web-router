@@ -36,6 +36,14 @@
     {
       "source": "/resume-maker/:path*",
       "destination": "https://resume-maker-omega-ten.vercel.app/:path*"
+    },
+    {
+      "source": "/top-or-flop",
+      "destination": "https://top-or-flop.vercel.app/"
+    },
+    {
+      "source": "/top-or-flop/:path*",
+      "destination": "https://top-or-flop.vercel.app/:path*"
     }
   ]
 }

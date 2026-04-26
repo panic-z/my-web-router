@@ -10,3 +10,9 @@ test("portal homepage keeps feedback out of the primary card nav", () => {
   assert.doesNotMatch(html, /<nav>[\s\S]*href="\/feedback\?product=portal"/);
   assert.match(html, /data-i18n="supportPrompt"/);
 });
+
+test("portal homepage links to Top or Flop", () => {
+  assert.match(html, /<nav>[\s\S]*href="\/top-or-flop"[\s\S]*<\/nav>/);
+  assert.match(html, /data-i18n="topOrFlop"/);
+  assert.match(html, /\/top-or-flop/);
+});
