@@ -23,4 +23,5 @@ test("portal homepage exposes organization and item list structured data", () =>
   assert.match(html, /"@type":\s*"Organization"/);
   assert.match(html, /"@type":\s*"ItemList"/);
   assert.match(html, /"sameAs":\s*\[/);
+  assert.match(html, /https:\/\/www\.cybershiba\.cn\/top-or-flop/);
 });
