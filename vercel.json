@@ -44,6 +44,14 @@
     {
       "source": "/top-or-flop/:path*",
       "destination": "https://top-or-flop.vercel.app/:path*"
+    },
+    {
+      "source": "/video-downloader",
+      "destination": "https://video-downloader-one-chi.vercel.app/video-downloader"
+    },
+    {
+      "source": "/video-downloader/:path*",
+      "destination": "https://video-downloader-one-chi.vercel.app/video-downloader/:path*"
     }
   ]
 }

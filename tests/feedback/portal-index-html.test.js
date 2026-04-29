@@ -16,3 +16,9 @@ test("portal homepage links to Top or Flop", () => {
   assert.match(html, /data-i18n="topOrFlop"/);
   assert.match(html, /\/top-or-flop/);
 });
+
+test("portal homepage links to Video Downloader", () => {
+  assert.match(html, /<nav>[\s\S]*href="\/video-downloader"[\s\S]*<\/nav>/);
+  assert.match(html, /data-i18n="videoDownloader"/);
+  assert.match(html, /\/video-downloader/);
+});
